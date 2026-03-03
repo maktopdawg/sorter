@@ -19,11 +19,9 @@ const Home = () => {
     setError(null)
 
     try {
-      const res = await axios.post(
-        "https://yhxzjyykdsfkdrmdxgho.supabase.co/functions/v1/application-task",
-        {url: apiUrl, email: email},
-        {headers: {"Content-Type": "application/json"}}
-      )
+      const validationUrl = `https://yhxzjyykdsfkdrmdxgho.supabase.co/functions/v1/application-task?url=${encodeURIComponent(apiUrl)}&email=${encodeURIComponent(email)}`;
+
+      const res = await axios.post(validationUrl);
 
       setRes(JSON.stringify(res.data, null, 2))
     } catch (error: unknown) {
